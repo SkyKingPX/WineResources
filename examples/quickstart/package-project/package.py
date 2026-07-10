@@ -70,7 +70,7 @@ project_file = project_path.name
 
 # Assemble the UAT `BuildCookRun` command to package the project
 package_command = [
-	'wine', 'C:/UnrealEngine/Engine/Build/BatchFiles/RunUAT.bat', 'BuildCookRun',
+	'wine', 'C:/nye/Engine/Build/BatchFiles/RunUAT.bat', 'BuildCookRun',
 	'-project=C:/project/{}'.format(project_file),
 	'-archive', '-archivedirectory=C:/project/dist',
 	'-platform=Win64', '-clientconfig=Development', '-serverconfig=Development',
@@ -107,13 +107,13 @@ if args.engine is not None:
 	
 	# Bind-mount both the Installed Build and the project into the AutoSDK container and package the project
 	mount_root = Path('/home/nonroot/.local/share/wineprefixes/prefix/drive_c')
-	engine_mount = mount_root / 'UnrealEngine'
+	engine_mount = mount_root / 'nye'
 	project_mount = mount_root / 'project'
 	Utility.run([
 		'docker', 'run', '--rm', '-it', '--init',
 		'-v', '{}:{}'.format(args.engine, engine_mount),
 		'-v', '{}:{}'.format(project_dir, project_mount),
-		'epicgames/autosdk-wine:{}'.format(engine_version),
+		'soncresityindustries/autosdk-wine:{}'.format(engine_version),
 		] + package_command
 	)
 	

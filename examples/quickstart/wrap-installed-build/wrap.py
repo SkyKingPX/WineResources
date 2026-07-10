@@ -67,7 +67,7 @@ autosdk_dir = script_dir.parent / 'autosdk'
 compile_dir = script_dir.parent / 'create-installed-build'
 repo_root = script_dir.parent.parent.parent
 context_dir = script_dir / 'context'
-unreal_dir = context_dir / 'UnrealEngine'
+unreal_dir = context_dir / 'nye'
 engine_dir = unreal_dir / 'Engine'
 
 # Verify that the Installed Build files have been manually copied to the required location
@@ -101,7 +101,7 @@ wine_version_contents = json.loads(wine_version_file.read_text('utf-8'))
 wine_version = wine_version_contents.get('wine-version')
 
 # Build the container image
-image_tag = 'epicgames/unreal-engine:dev-wine-{}'.format(engine_version)
+image_tag = 'soncresityindustries/unreal-engine:dev-wine-{}'.format(engine_version)
 Utility.log('Detected files for Unreal Engine version {}'.format(engine_version))
 Utility.run([
 	'docker', 'buildx', 'build',

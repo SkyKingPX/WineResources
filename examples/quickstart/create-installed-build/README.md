@@ -49,6 +49,6 @@ By default, the Installed Build produced by the script only exists on the host f
 ./compile.sh </path/to/UE/source> --wrap
 ```
 
-This will automatically copy the the Installed Build files from the host filesystem into a container image. When this process completes, the container image will be available with the tag `epicgames/unreal-engine:dev-wine-<VERSION>`, where `<VERSION>` is the version of Unreal Engine that the container image was built for.
+This will automatically copy the the Installed Build files from the host filesystem into a container image. When this process completes, the container image will be available with the tag `soncresityindustries/unreal-engine:dev-wine-<VERSION>`, where `<VERSION>` is the version of Unreal Engine that the container image was built for.
 
 Alternatively, you can create a container image from existing Installed Build files at any time by manually running the script in the [**wrap-installed-build**](../wrap-installed-build/) directory.

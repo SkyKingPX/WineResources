@@ -1,5 +1,5 @@
 ARG WINE_VERSION='invalid'
-FROM epicgames/wine-patched:${WINE_VERSION} AS structure
+FROM soncresityindustries/wine-patched:${WINE_VERSION} AS structure
 
 # The list of Visual Studio components and workloads to install
 ARG COMPONENTS_AND_WORKLOADS=''
@@ -52,9 +52,9 @@ RUN mv '/tmp/msvc-wine/downloaded/DIA SDK'       "$AUTOSDK_DIR/DIA SDK/$VISUAL_S
 
 # Query the LLVM version and move the files for LLVM into the AutoSDK structure
 # (Note that we create a copy of the LLVM files before running clang, in case any first-run logic modifies the on-disk files)
-RUN cp -R '/tmp/msvc-wine/downloaded/VC/Tools/Llvm' /tmp/llvm && \
-	LLVM_VERSION=`wine /tmp/llvm/bin/clang-cl.exe --version | grep 'clang version' | grep -o -E '[0-9\.]+'` && \
-	mv '/tmp/msvc-wine/downloaded/VC/Tools/Llvm' "$AUTOSDK_DIR/LLVM/$LLVM_VERSION"
+RUN cp -R '/tmp/msvc-wine/downloaded/VC/Tools/Llvm/x64' /tmp/llvm && \
+    LLVM_VERSION=$(wine /tmp/llvm/bin/clang-cl.exe --version | grep 'clang version' | grep -o -E '[0-9.]+') && \
+    mv '/tmp/msvc-wine/downloaded/VC/Tools/Llvm' "$AUTOSDK_DIR/LLVM/$LLVM_VERSION"
 
 # Extract the files for the .NET Framework SDK (if required) and move them into the AutoSDK structure
 RUN if [ ! -z "$DOTNET_FRAMEWORK_SDK" ]; then \
@@ -85,7 +85,7 @@ RUN cd /tmp/DebugTools && \
 	cp -R * "$AUTOSDK_DIR/Windows Kits/"
 
 # Copy the assembled AutoSDK files into a clean version of our Wine base image
-FROM epicgames/wine-patched:${WINE_VERSION}
+FROM soncresityindustries/wine-patched:${WINE_VERSION}
 COPY --from=structure --chown=nonroot:nonroot /tmp/AutoSDK ${WINEPREFIX}/drive_c/AutoSDK
 
 # Set the environment variable to configure Unreal Engine to use our AutoSDK files

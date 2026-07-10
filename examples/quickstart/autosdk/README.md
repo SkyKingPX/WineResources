@@ -35,7 +35,7 @@ Run the appropriate wrapper script depending on the operating system, passing in
 
 The wrapper script will run the Python build script itself, using the appropriate commands for the operating system. The Python build script will automatically determine which SDK components are required for the provided version of the engine. The script will then build the AutoSDK container image.
 
-Once the build completes, the container image will be available with the tag `epicgames/autosdk-wine:<VERSION>`, where `<VERSION>` is the version of Unreal Engine that the container image was built for.
+Once the build completes, the container image will be available with the tag `soncresityindustries/autosdk-wine:<VERSION>`, where `<VERSION>` is the version of Unreal Engine that the container image was built for.
 
 
 ## Using the AutoSDK container image

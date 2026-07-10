@@ -154,11 +154,12 @@ wine_version_contents = json.loads(wine_version_file.read_text('utf-8'))
 wine_version = wine_version_contents.get('wine-version')
 
 # Build our AutoSDK image
-image_tag = 'epicgames/autosdk-wine:{}'.format(engine_version)
+image_tag = 'soncresityindustries/autosdk-wine:{}'.format(engine_version)
 Utility.run([
 	'docker', 'buildx', 'build',
 	'--progress=plain',
 	'--platform', 'linux/amd64',
+	'--network=host',
 	'--build-arg', 'COMPONENTS_AND_WORKLOADS={}'.format(' '.join(sdk_details['components'])),
 	'--build-arg', 'DOTNET_FRAMEWORK_SDK={}'.format(sdk_details['dotnet_sdk']),
 	'--build-arg', 'VISUAL_STUDIO_IDENTIFIER={}'.format(sdk_details['vs_identifier']),

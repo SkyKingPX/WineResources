@@ -217,6 +217,7 @@ if not args.layout:
 		'docker', 'buildx', 'build',
 		'--progress=plain',
 		'--platform', 'linux/amd64',
-		'-t', 'epicgames/wine-patched:{}'.format(version['wine-version']),
+		'--network=host',
+		'-t', 'soncresityindustries/wine-patched:{}'.format(version['wine-version']),
 		context_dir
 	])

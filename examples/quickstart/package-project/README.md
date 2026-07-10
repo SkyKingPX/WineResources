@@ -50,7 +50,7 @@ Once packaging completes, the packaged files will be available on the host files
 To perform packaging using Installed Build files that have been [wrapped in a container image](../wrap-installed-build/), run the wrapper script with the path of the `.uproject` file you wish to package and the container image tag:
 
 ```bash
-./package.sh --project </path/to/.uproject> --image epicgames/unreal-engine:dev-wine-<VERSION>
+./package.sh --project </path/to/.uproject> --image soncresityindustries/unreal-engine:dev-wine-<VERSION>
 ```
 
 The wrapper script will run the Python build script itself. The Python build script will start a container using the specified Installed Build container image and bind-mount the project source tree from the host filesystem into the container. The script will then package the project for Windows.

@@ -128,23 +128,32 @@ Utility.run(
 )
 
 # Bind-mount the engine source into the AutoSDK container and create an Installed Build
-mount_path = '/home/nonroot/.local/share/wineprefixes/prefix/drive_c/UnrealEngine'
+mount_path = '/home/nonroot/.local/share/wineprefixes/prefix/drive_c/nye'
 Utility.run([
-	'docker', 'run', '--rm', '-t', '--init',
+	'docker', 'run', '--rm', '-t', '--init', '--network=host',
 	'-v', '{}:{}'.format(args.engine_source, mount_path),
 	'-w', mount_path,
-	'epicgames/autosdk-wine:{}'.format(engine_version),
+	'soncresityindustries/autosdk-wine:{}'.format(engine_version),
 	'wine', './Engine/Build/BatchFiles/RunUAT.bat', 'BuildGraph',
 	'-script=Engine/Build/InstalledEngineBuild.xml',
 	'-target=Make Installed Build Win64',
-	'-set:HostPlatformOnly=true'
+	'-set:WithWin64=true',
+	'-set:WithAndroid=false',
+	'-set:WithDDC=false',
+	'-set:WithLinux=true',
+	'-set:WithLinuxArm64=false',
+	'-set:WithIOS=false',
+	'-set:WithTVOS=false',
+	'-set:WithMac=false',
+	'-set:WithClient=true',
+	'-set:WithServer=true'
 ])
 
 # Wrap the Installed Build in a container image if requested
 if args.wrap:
 	
 	# Clean out any existing contents in the target directory, except for the `.gitignore` file
-	target_dir = wrap_dir / 'context' / 'UnrealEngine'
+	target_dir = wrap_dir / 'context' / 'nye'
 	Utility.log('Removing existing files in {}...'.format(target_dir))
 	for child in target_dir.iterdir():
 		if child.name != '.gitignore':
