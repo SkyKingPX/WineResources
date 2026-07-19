@@ -28,4 +28,4 @@ The [TensorWorks](https://tensorworks.com.au/) blog post titled *"Migrating Unre
 
 **Link:** <https://tensorworks.com.au/blog/unreal-engine-cpp-compilation-for-windows-under-wine/>
 
-The [TensorWorks](https://tensorworks.com.au/) blog post titled *"Unreal Engine C++ compilation for Windows under Linux with Wine"* provides an overview of the creation of the C++ compilation examples in the [quickstart](../examples/quickstart/) directory of this repository.
+The [TensorWorks](https://tensorworks.com.au/) blog post titled *"Unreal Engine C++ compilation for Windows under Linux with Wine"* provides an overview of the creation of the C++ compilation examples in the [quickstart](../examples/nye/) directory of this repository.
